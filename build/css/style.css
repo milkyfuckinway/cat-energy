@@ -1009,6 +1009,11 @@ body {
     width: auto;
   }
 
+  .main-headeer__icon-logo {
+    height: 50px;
+    width: 60px;
+  }
+
   .main-header__text-logo {
     left: auto;
     position: unset;
@@ -1257,6 +1262,11 @@ body {
     max-width: 1440px;
     padding: 50px 110px;
     width: 100%;
+  }
+
+  .main-headeer__icon-logo {
+    height: 59px;
+    width: 70px;
   }
 
   .main-nav ul li a {

@@ -1,8 +1,10 @@
 header.main-header.main-header--no-js
 	.main-header__wrapper
 		a.main-header__home(href='index.html' aria-label='Домашняя страница.')
-			svg.main-headeer__icon-logo
-				use(xlink:href="img/sprite-multi.svg#logo-mobile")
+			picture 
+				source(media="(min-width: 1440px)" srcset="img/svg/logo-desktop.svg")
+				source(media="(min-width: 768px)" srcset="img/svg/logo-tablet.svg")
+				img.main-headeer__icon-logo(src="img/svg/logo-mobile.svg" alt="«Мишка»" width='61' height='50')
 			svg.main-header__text-logo
 				use(xlink:href="img/sprite-mono.svg#text-logo")
 		button.main-header__menu-button(type='button')
