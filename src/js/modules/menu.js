@@ -1,6 +1,7 @@
 const menuButton = document.querySelector('.main-header__menu-button');
 const nav = document.querySelector('.main-nav');
 const mainHeader = document.querySelector('.main-header');
+const page = document.querySelector('.page-content');
 
 mainHeader.classList.remove('main-header--no-js');
 
@@ -16,12 +17,30 @@ const addAnimation = () => {
 
 addAnimation();
 
-menuButton.addEventListener('click', () => {
+const closeMenu = () => {
+  menuButton.classList.remove('main-header__menu-button--active');
+  nav.classList.remove('main-nav--active');
+  page.removeEventListener('click', onClickAway);
+};
+
+const openMenu = () => {
+  menuButton.classList.add('main-header__menu-button--active');
+  nav.classList.add('main-nav--active');
+  page.addEventListener('click', onClickAway);
+};
+
+function onClickAway () {
+  closeMenu();
+}
+
+const toggleMenu = () =>{
   if (menuButton.classList.contains('main-header__menu-button--active')) {
-    menuButton.classList.remove('main-header__menu-button--active');
-    nav.classList.remove('main-nav--active');
+    closeMenu();
   } else {
-    menuButton.classList.add('main-header__menu-button--active');
-    nav.classList.add('main-nav--active');
+    openMenu();
   }
+};
+
+menuButton.addEventListener('click', () => {
+  toggleMenu();
 });
