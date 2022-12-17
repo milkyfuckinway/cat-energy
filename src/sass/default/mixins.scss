@@ -1,0 +1,22 @@
+@mixin font-face($name, $file, $style, $weight, $format) {
+  @font-face {
+    font-display: swap;
+    font-family: "#{$name}";
+    font-style: $style;
+    font-weight: $weight;
+    src: local("#{$file}"), url("../fonts/#{$file}") format("#{$format}");
+  }
+}
+
+@mixin full-width-content($top: 0, $right: 16px, $bottom: 0, $left: 16px) {
+  @media (min-width: $mobile-width) {
+    padding: $top $right $bottom $left;
+  }
+
+  @media (min-width: $desktop-width) {
+    $right: 20px;
+    $left: 20px;
+
+    padding: $top $right $bottom $left;
+  }
+}

@@ -1,0 +1,1 @@
+const mapContainer=document.querySelector("#map");ymaps.ready((()=>{new ymaps.Map(mapContainer,{center:[55.76,37.64],zoom:10,type:"yandex#map",controls:[]})}));

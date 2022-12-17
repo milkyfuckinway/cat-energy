@@ -1,0 +1,35 @@
+.page-content .promo {
+  margin-bottom: 20px;
+
+  @media (min-width: $tablet-width) {
+    margin-bottom: 0;
+  }
+
+  @media (min-width: $desktop-width) {
+    margin-bottom: 82px;
+  }
+}
+
+.page-content .options {
+  margin-bottom: 20px;
+
+  @media (min-width: $tablet-width) {
+    margin-bottom: 45px;
+  }
+
+  @media (min-width: $desktop-width) {
+    margin-bottom: 71px;
+  }
+}
+
+.page-content .advantages {
+  margin-bottom: 49px;
+
+  @media (min-width: $tablet-width) {
+    margin-bottom: 43px;
+  }
+
+  @media (min-width: $desktop-width) {
+    margin-bottom: 69px;
+  }
+}

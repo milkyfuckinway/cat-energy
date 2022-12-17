@@ -1,0 +1,5 @@
+@use "mixins.scss" as *;
+@include font-face("oswald-medium", "oswald-medium.woff", "medium", "500", "woff");
+@include font-face("oswald-medium", "oswald-medium.woff2", "medium", "500", "woff2");
+@include font-face("oswald-regular", "oswald-regular.woff", "regular", "400", "woff");
+@include font-face("oswald-regular", "oswald-regular.woff2", "regular", "400", "woff2");

@@ -1,0 +1,143 @@
+.promo {
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  min-height: 302px;
+  padding: 27px 20px 0;
+  position: relative;
+
+  @media (min-width: $tablet-width) {
+    align-items: flex-start;
+    background: #ffffff;
+    color: #000000;
+    min-height: auto;
+    padding: 0 90px;
+    padding-bottom: 20px;
+  }
+
+  @media (min-width: $desktop-width) {
+    background: unset;
+    margin: 0 auto;
+    margin-top: 50px;
+    max-width: 1440px;
+    padding-left: 190px;
+    position: unset;
+    z-index: 200;
+  }
+
+  &::before {
+    background: url("../img/decorative/promo-background.jpg") center / cover;
+    content: "";
+    height: 62.5%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100%;
+    z-index: -2;
+
+    @media (min-width: $tablet-width) {
+      visibility: hidden;
+    }
+
+    @media (min-width: $desktop-width) {
+      height: 694px;
+      visibility: visible;
+      width: 50%;
+    }
+  }
+
+  &::after {
+    background-color: rgb(104 183 56 / 85%);
+    content: "";
+    height: 62.5%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100%;
+    z-index: -1;
+
+    @media (min-width: $tablet-width) {
+      background-color: #ffffff;
+    }
+
+    @media (min-width: $desktop-width) {
+      background-color: rgb(104 183 56 / 85%);
+      height: 694px;
+      width: 50%;
+    }
+  }
+}
+
+.promo__hero {
+  display: block;
+  margin: 0 auto;
+
+  @media (min-width: $tablet-width) {
+    height: auto;
+    left: 50%;
+    max-width: 609px;
+    position: absolute;
+    transform: translate(-50%, 0);
+    width: 100%;
+  }
+
+  @media (min-width: $desktop-width) {
+    max-width: 552px;
+    transform: translate(-25%, -50%);
+  }
+}
+
+.promo__title {
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 100%;
+  margin-bottom: 25px;
+  text-align: center;
+
+  @media (min-width: $tablet-width) {
+    font-size: 60px;
+    max-width: 414px;
+    text-align: start;
+    z-index: 1;
+  }
+}
+
+.promo__slogan {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 100%;
+  margin-bottom: 30px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.promo__button {
+  align-items: center;
+  background-color: #68b738;
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  font-size: 14px;
+  justify-content: center;
+  line-height: 18px;
+  min-height: 40px;
+  padding: 7px 44px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  width: 100%;
+
+  @media (min-width: $tablet-width) {
+    font-size: 20px;
+    line-height: 100%;
+    margin-bottom: 526px;
+    margin-top: 30px;
+    padding: 14px 26px;
+    width: auto;
+    z-index: 1;
+  }
+
+  @media (min-width: $desktop-width) {
+    margin-bottom: 185px;
+  }
+}
