@@ -21,25 +21,29 @@ const removeMoveListener = () => {
 
 sliderToggler.addEventListener('mousedown', addMoveListener);
 
+sliderToggler.addEventListener('touchmove', onMove);
+
 function onMove(evt) {
   evt.preventDefault();
   document.addEventListener('mouseup', removeMoveListener);
   addResizeListener();
   const sliderWidth = slider.offsetWidth;
-  const positionInSlider = evt.clientX - slider.offsetLeft;
-  if (positionInSlider >= 0 && positionInSlider <= sliderWidth) {
+  const positionInSlider = () => evt.type === 'touchmove'
+    ? evt.touches[0].clientX - slider.offsetLeft
+    : evt.clientX - slider.offsetLeft;
+  if (positionInSlider() >= 0 && positionInSlider() <= sliderWidth) {
     sliderBefore.style.clipPath = `inset(0 ${
-      sliderWidth - positionInSlider
+      sliderWidth - positionInSlider()
     }px 0 0)`;
-    sliderAfter.style.clipPath = `inset(0 0 0 ${positionInSlider}px)`;
-    sliderToggler.style.left = `${positionInSlider}px`;
+    sliderAfter.style.clipPath = `inset(0 0 0 ${positionInSlider()}px)`;
+    sliderToggler.style.left = `${positionInSlider()}px`;
   }
-  if (positionInSlider < 0) {
+  if (positionInSlider() < 0) {
     sliderToggler.style.left = '0px';
     sliderBefore.style.clipPath = `inset(0 ${sliderWidth}px 0 0)`;
     sliderAfter.style.clipPath = 'inset(0 0 0 0px)';
   }
-  if (positionInSlider > sliderWidth) {
+  if (positionInSlider() > sliderWidth) {
     sliderToggler.style.left = `${sliderWidth}px`;
     sliderBefore.style.clipPath = 'inset(0 0px 0 0)';
     sliderAfter.style.clipPath = `inset(0 0 0 ${sliderWidth}px)`;

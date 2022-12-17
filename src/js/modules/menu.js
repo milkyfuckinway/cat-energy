@@ -2,7 +2,6 @@ const menuButton = document.querySelector('.main-header__menu-button');
 const nav = document.querySelector('.main-nav');
 const mainHeader = document.querySelector('.main-header');
 const page = document.querySelector('.page-content');
-let prevScrollpos = window.pageYOffset;
 
 mainHeader.classList.remove('main-header--no-js');
 
@@ -23,6 +22,7 @@ const closeMenu = () => {
   nav.classList.remove('main-nav--active');
   page.removeEventListener('click', onClickAway);
   window.removeEventListener('scroll', onScrollDown);
+  document.removeEventListener('keydown', onEsc);
 };
 
 const openMenu = () => {
@@ -30,6 +30,7 @@ const openMenu = () => {
   nav.classList.add('main-nav--active');
   page.addEventListener('click', onClickAway);
   window.addEventListener('scroll', onScrollDown);
+  document.addEventListener('keydown', onEsc);
 };
 
 function onClickAway () {
@@ -48,11 +49,17 @@ menuButton.addEventListener('click', () => {
   toggleMenu();
 });
 
-function onScrollDown () {
-  const currentScrollPos = window.pageYOffset;
-  if (prevScrollpos < currentScrollPos) {
+function onEsc (evt) {
+  console.log(evt.key);
+  if(evt.key === 'Escape') {
+    evt.preventDefault();
     closeMenu();
+    menuButton.blur();
   }
-  prevScrollpos = currentScrollPos;
 }
+
+function onScrollDown () {
+  closeMenu();
+}
+
 
