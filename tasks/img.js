@@ -30,9 +30,7 @@ export default (done) => {
             pngOptions: {
               compressionLevel: 9,
               adaptiveFiltering: true,
-              force: true,
-              palette: true,
-              colors: 256,
+              palette: true
             },
             rename: { suffix: '_mobile' },
           },
@@ -48,9 +46,7 @@ export default (done) => {
             pngOptions: {
               compressionLevel: 9,
               adaptiveFiltering: true,
-              force: true,
-              palette: true,
-              colors: 256,
+              palette: true
             },
             rename: { suffix: '_mobile@2x' },
           },
@@ -66,9 +62,7 @@ export default (done) => {
             pngOptions: {
               compressionLevel: 9,
               adaptiveFiltering: true,
-              force: true,
-              palette: true,
-              colors: 256,
+              palette: true
             },
             rename: { suffix: '_tablet' },
           },
@@ -84,9 +78,7 @@ export default (done) => {
             pngOptions: {
               compressionLevel: 9,
               adaptiveFiltering: true,
-              force: true,
-              palette: true,
-              colors: 256,
+              palette: true
             },
             rename: { suffix: '_tablet@2x' },
           },
@@ -102,9 +94,7 @@ export default (done) => {
             pngOptions: {
               compressionLevel: 9,
               adaptiveFiltering: true,
-              force: true,
-              palette: true,
-              colors: 256,
+              palette: true
             },
             rename: { suffix: '_desktop' },
           },
@@ -120,9 +110,7 @@ export default (done) => {
             pngOptions: {
               compressionLevel: 9,
               adaptiveFiltering: true,
-              force: true,
-              palette: true,
-              colors: 256,
+              palette: true
             },
             rename: { suffix: '_desktop@2x' },
           },
@@ -172,9 +160,7 @@ export default (done) => {
                     pngOptions: {
                       compressionLevel: 9,
                       adaptiveFiltering: true,
-                      force: true,
-                      palette: true,
-                      colors: 256,
+                      palette: true
                     },
                   },
                   {
