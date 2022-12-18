@@ -19,7 +19,7 @@
   font-family: "oswald-regular";
   font-style: "regular";
   font-weight: "400";
-  src: local("oswald-regular.woff2"), url("../fonts/oswald-regular.woff2") format("woff2");
+  src: local("oswald-regular.woff"), url("../fonts/oswald-regular.woff") format("woff");
 }
 
 @font-face {
@@ -27,7 +27,7 @@
   font-family: "oswald-regular";
   font-style: "regular";
   font-weight: "400";
-  src: local("oswald-regular.woff"), url("../fonts/oswald-regular.woff") format("woff");
+  src: local("oswald-regular.woff2"), url("../fonts/oswald-regular.woff2") format("woff2");
 }
 
 *,
