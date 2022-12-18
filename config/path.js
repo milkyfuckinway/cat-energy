@@ -40,14 +40,19 @@ export default {
     dest: `${pathDest }/fonts`,
     appendto: `${pathSrc }/sass/default/fonts.scss`
   },
+  sprite: {
+    src: `${pathSrc }/img/sprite/**/**/*.svg`,
+    watch: `${pathSrc }/img/sprite/**/**/*.svg`,
+    dest: `${pathDest }/img/`
+  },
   spritemono: {
-    src: `${pathSrc }/img/sprite/mono/**/*.svg`,
-    watch: `${pathSrc }/img/sprite/mono/**/*.svg`,
+    src: `${pathSrc }/img/sprite/mono/*.svg`,
+    watch: `${pathSrc }/img/sprite/mono/*.svg`,
     dest: `${pathDest }/img/`
   },
   spritemulti: {
-    src: `${pathSrc }/img/sprite/multi/**/*.svg`,
-    watch: `${pathSrc }/img/sprite/multi/**/*.svg`,
+    src: `${pathSrc }/img/sprite/multi/*.svg`,
+    watch: `${pathSrc }/img/sprite/multi/*.svg`,
     dest: `${pathDest }/img/`
   },
   htmlsprite: {

@@ -9,12 +9,8 @@ import img from './tasks/img.js';
 import svg from './tasks/svg.js';
 import fonts from './tasks/fonts.js';
 import app from './config/app.js';
-import applyfonts from './tasks/applyfonts.js';
-import spritemono from './tasks/sprite-mono.js';
-import spritemulti from './tasks/sprite-multi.js';
-import applysprite from './tasks/applysprite.js';
+import sprite from './tasks/sprite.js';
 import plugins from './tasks/plugins.js';
-import makepicturetag from './tasks/makepicturetag.js';
 
 const server = () => {
   browserSync.init({
@@ -30,13 +26,8 @@ const watcher = () => {
   gulp.watch(path.js.watch, js).on('all', browserSync.reload);
   gulp.watch(path.svg.watch, svg).on('all', browserSync.reload);
   gulp.watch(path.img.watch, img).on('all', browserSync.reload);
-  gulp.watch(path.img.watch, makepicturetag).on('all', browserSync.reload);
-  gulp.watch(path.spritemono.watch, spritemono).on('all', browserSync.reload);
-  gulp.watch(path.spritemulti.watch, spritemulti).on('all', browserSync.reload);
+  gulp.watch(path.sprite.watch, sprite).on('all', browserSync.reload);
   gulp.watch(path.fonts.watch, fonts).on('all', browserSync.reload);
-  gulp.watch(path.fonts.watch, applyfonts).on('all', browserSync.reload);
-  gulp.watch(path.spritemono.watch, applysprite).on('all', browserSync.reload);
-  gulp.watch(path.spritemulti.watch, applysprite).on('all', browserSync.reload);
   gulp.watch(path.plugins.watch, plugins).on('all', browserSync.reload);
 };
 
@@ -49,13 +40,9 @@ const build = gulp.series (
     scss,
     js,
     svg,
-    spritemono,
-    spritemulti,
+    sprite,
     plugins,
   ),
-  makepicturetag,
-  applyfonts,
-  applysprite,
 );
 
 const dev = gulp.series (
@@ -66,16 +53,12 @@ const dev = gulp.series (
     scss,
     js,
     svg,
-    spritemono,
-    spritemulti,
+    sprite,
     plugins,
     img,
   ),
-  makepicturetag,
-  applyfonts,
-  applysprite,
   gulp.parallel(watcher, server),
 );
 export default app.isProd ? build : dev;
 
-export {build, dev, server, watcher, clear, applysprite, fonts, applyfonts, spritemono, spritemulti, makepicturetag};
+export {build, dev, server, watcher, clear };

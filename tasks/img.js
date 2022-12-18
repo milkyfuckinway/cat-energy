@@ -2,6 +2,7 @@ import gulp from 'gulp';
 import size from 'gulp-size';
 import sharp from 'gulp-sharp-responsive';
 import newer from 'gulp-newer';
+import fs from 'fs-extra';
 
 const contentManualSrc = './src/img/content-manual/**/*.{png,jpg,jpeg,gif}';
 const contentAutoSrc = './src/img/content/**/*.{png,jpg,jpeg,gif}';
@@ -26,7 +27,13 @@ export default (done) => {
           {
             width: (metadata) => Math.round(metadata.width * 0.25),
             jpegOptions: { quality: jpegQuality, progressive: true },
-            pngOptions: { compressionLevel: 9, adaptiveFiltering: true, force: true },
+            pngOptions: {
+              compressionLevel: 9,
+              adaptiveFiltering: true,
+              force: true,
+              palette: true,
+              colors: 256,
+            },
             rename: { suffix: '_mobile' },
           },
           {
@@ -38,7 +45,13 @@ export default (done) => {
           {
             width: (metadata) => Math.round(metadata.width * 0.5),
             jpegOptions: { quality: jpegQuality2x, progressive: true },
-            pngOptions: { compressionLevel: 9, adaptiveFiltering: true, force: true },
+            pngOptions: {
+              compressionLevel: 9,
+              adaptiveFiltering: true,
+              force: true,
+              palette: true,
+              colors: 256,
+            },
             rename: { suffix: '_mobile@2x' },
           },
           {
@@ -50,7 +63,13 @@ export default (done) => {
           {
             width: (metadata) => Math.round(metadata.width * 0.35),
             jpegOptions: { quality: jpegQuality, progressive: true },
-            pngOptions: { compressionLevel: 9, adaptiveFiltering: true, force: true },
+            pngOptions: {
+              compressionLevel: 9,
+              adaptiveFiltering: true,
+              force: true,
+              palette: true,
+              colors: 256,
+            },
             rename: { suffix: '_tablet' },
           },
           {
@@ -62,7 +81,13 @@ export default (done) => {
           {
             width: (metadata) => Math.round(metadata.width * 0.7),
             jpegOptions: { quality: jpegQuality2x, progressive: true },
-            pngOptions: { compressionLevel: 9, adaptiveFiltering: true, force: true },
+            pngOptions: {
+              compressionLevel: 9,
+              adaptiveFiltering: true,
+              force: true,
+              palette: true,
+              colors: 256,
+            },
             rename: { suffix: '_tablet@2x' },
           },
           {
@@ -74,7 +99,13 @@ export default (done) => {
           {
             width: (metadata) => Math.round(metadata.width * 0.5),
             jpegOptions: { quality: jpegQuality, progressive: true },
-            pngOptions: { compressionLevel: 9, adaptiveFiltering: true, force: true },
+            pngOptions: {
+              compressionLevel: 9,
+              adaptiveFiltering: true,
+              force: true,
+              palette: true,
+              colors: 256,
+            },
             rename: { suffix: '_desktop' },
           },
           {
@@ -86,7 +117,13 @@ export default (done) => {
           {
             width: (metadata) => metadata.width,
             jpegOptions: { quality: jpegQuality2x, progressive: true },
-            pngOptions: { compressionLevel: 9, adaptiveFiltering: true, force: true },
+            pngOptions: {
+              compressionLevel: 9,
+              adaptiveFiltering: true,
+              force: true,
+              palette: true,
+              colors: 256,
+            },
             rename: { suffix: '_desktop@2x' },
           },
           {
@@ -99,9 +136,13 @@ export default (done) => {
       })
     )
     .pipe(size({ title: 'После конвентирования в адаптив' }))
-    .pipe(gulp.dest(contentDest)).on('end', () => {
-      gulp.src(contentManualSrc)
-        .pipe(size({ title: 'Создание из заготовленных изображений файлы webp' }))
+    .pipe(gulp.dest(contentDest))
+    .on('end', () => {
+      gulp
+        .src(contentManualSrc)
+        .pipe(
+          size({ title: 'Создание из заготовленных изображений файлы webp' })
+        )
         .pipe(newer(contentManualSrc))
         .pipe(
           sharp({
@@ -116,29 +157,66 @@ export default (done) => {
           })
         )
         .pipe(size({ title: 'После создания webp' }))
-        .pipe(gulp.dest(contentDest));
-      gulp.src(decorativeSrc)
-        .pipe(size({ title: 'Оптимизация декоративных изображений' }))
-        .pipe(newer(decorativeSrc))
-        .pipe(
-          sharp({
-            formats: [
-              {
-                width: (metadata) => metadata.width,
-                jpegOptions: { quality: 80, progressive: true },
-                pngOptions: { palette: true },
-              },
-              {
-                width: (metadata) => metadata.width,
-                format: 'webp',
-                webpOptions: { quality: 80 },
-              },
-            ],
-          })
-        )
-        .pipe(size({ title: 'Размер декоративных изображений после оптимизации' }))
-        .pipe(gulp.dest(decorativeDest));
-      done();
+        .pipe(gulp.dest(contentDest))
+        .on('end', () => {
+          gulp
+            .src(decorativeSrc)
+            .pipe(size({ title: 'Оптимизация декоративных изображений' }))
+            .pipe(newer(decorativeSrc))
+            .pipe(
+              sharp({
+                formats: [
+                  {
+                    width: (metadata) => metadata.width,
+                    jpegOptions: { quality: 80, progressive: true },
+                    pngOptions: {
+                      compressionLevel: 9,
+                      adaptiveFiltering: true,
+                      force: true,
+                      palette: true,
+                      colors: 256,
+                    },
+                  },
+                  {
+                    width: (metadata) => metadata.width,
+                    format: 'webp',
+                    webpOptions: { quality: 80 },
+                  },
+                ],
+              })
+            )
+            .pipe(
+              size({
+                title: 'Размер декоративных изображений после оптимизации',
+              })
+            )
+            .pipe(gulp.dest(decorativeDest));
+        })
+        .on('end', () => {
+          if (fs.existsSync('./src/pug/layout/picture.pug')) {
+            fs.unlink('./src/pug/layout/picture.pug');
+          }
+          fs.readdir(contentDest, (err, files) => {
+            if (files) {
+              fs.readdir(contentDest, (errr, items) => {
+                items.forEach((item) => {
+                  fs.appendFile(
+                    './src/pug/layout/picture.pug',
+                    `"Для файлов ${item}"
+                    picture
+                      source(type="image/webp" media="(min-width: 1150px)" srcset="./img/content/${item}/${item}_desktop.webp, ./img/content/${item}/${item}_desktop@2x.webp 2x")
+                      source(type="image/webp" media="(min-width: 768px)" srcset="./img/content/${item}/${item}_tablet.webp, ./img/content/${item}/${item}_tablet@2x.webp 2x")
+                      source(type="image/webp" srcset="./img/content/${item}/${item}_mobile.webp, ./img/content/${item}/${item}_mobile@2x.webp 2x")
+                      source(media="(min-width: 1150px)" srcset="./img/content/${item}/${item}_desktop.jpg, ./img/content/${item}/${item}_desktop@2x.jpg 2x")
+                      source(media="(min-width: 768px)" srcset="./img/content/${item}/${item}_tablet.jpg, ./img/content/${item}/${item}_tablet@2x.jpg 2x")
+                      img(class="#" src="./img/content/${item}/${item}_mobile.jpg" alt="" srcset="./img/content/${item}/${item}_mobile@2x.jpg 2x" width="#" height="#")
+                    \n`
+                  );
+                });
+              });
+            }
+          });
+          done();
+        });
     });
-
 };
